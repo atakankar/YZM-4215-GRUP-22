@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form asp-action="Login" asp-controller="User">
+    <div class="form-group">
+        <label for="exampleInputEmail1">E-Posta Adresi</label>
+        <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Şifre</label>
+        <input type="password" class="form-control" name="password">
+    </div>
+    <button type="submit" class="btn btn-primary">Giriş</button>
+    <button asp-action="" asp-controller="" type="button" class="btn btn-primary">Kaydol</button>
+    <button asp-action="" asp-controller="" type="button" class="btn btn-primary">Bayi Girişi</button>
+</form>
