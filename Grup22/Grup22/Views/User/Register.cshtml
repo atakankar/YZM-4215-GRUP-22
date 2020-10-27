@@ -1,0 +1,55 @@
+﻿@model Grup22.Models.fact_User
+
+@{
+    ViewBag.Title = "Kayıt Ol";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <br />
+    <br />
+    <p style="text-align:center;font-family:Calibri;color:cadetblue;font-size:50px">FİRMANI KAYDET</p>
+    <br />
+    <div class="form-horizontal">
+        <div class="offset-2">
+            @using (Html.BeginForm())
+            {
+                <div class="form-group">
+                    <div class="alert col-9" style="text-align:center;color:red">@ViewBag.result</div>
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.EditorFor(model => model.fact_Email, new { htmlAttributes = new { @class = "form-control col-9", @placeholder = "Eposta Adresi", @type = "email" } })
+                    @Html.ValidationMessageFor(model => model.fact_Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.EditorFor(model => model.fact_Name, new { htmlAttributes = new { @class = "form-control col-9", @placeholder = "Firma Adı" } })
+                    @Html.ValidationMessageFor(model => model.fact_Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.EditorFor(model => model.fact_Adress, new { htmlAttributes = new { @class = "form-control col-9", @placeholder = "Adres" } })
+                    @Html.ValidationMessageFor(model => model.fact_Adress, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.EditorFor(model => model.fact_Password, new { htmlAttributes = new { @class = "form-control col-9", @placeholder = "Şifre", @type = "password" } })
+                    @Html.ValidationMessageFor(model => model.fact_Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="KAYIT OL" class="btn btn-primary col-9" />
+                </div>
+            }
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

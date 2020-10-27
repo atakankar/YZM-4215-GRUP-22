@@ -1,13 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
+using Grup22.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Connections;
+using Volo.Abp.Data;
+using Nest;
+using Microsoft.EntityFrameworkCore;
 
 namespace Grup22
 {
@@ -24,6 +30,15 @@ namespace Grup22
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            // Oturum süresi 30 dk olarak ayarlandý
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+            // View'da Session verilerine eriþmek için bunu tanýmlamalýyýz.
+            services.AddHttpContextAccessor();
+
+            services.AddDbContext<KurumsalContext>(options => options.UseSqlServer(Configuration.GetConnectionString(name: "KurumsalDB")));
+            //services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +58,8 @@ namespace Grup22
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 

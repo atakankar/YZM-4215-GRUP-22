@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Grup22",
+    "\\Grup22\\Grup22",
+    "\\Grup22\\Grup22\\Controllers",
+    "\\Grup22\\Grup22\\obj\\Debug"
   ],
+  "SelectedNode": "\\Grup22\\Grup22\\Grup22.csproj",
   "PreviewInSolutionExplorer": false
 }
