@@ -11,6 +11,8 @@ namespace Grup22.Context
     {
         public KurumsalContext(DbContextOptions<KurumsalContext> options) : base(options)
         { }
-        public DbSet<fact_User> fact_Users { get; set; }
+        public DbSet<FactoryUser> factoryUsers { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Seller> Sellers { get; set; }
     }
 }

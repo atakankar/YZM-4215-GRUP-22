@@ -57,6 +57,10 @@
               "target": "Package",
               "version": "[3.2.7, )"
             },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
             "Microsoft.AspNetCore.Session": {
               "target": "Package",
               "version": "[2.2.0, )"
@@ -100,6 +104,10 @@
             "NEST": {
               "target": "Package",
               "version": "[7.9.0, )"
+            },
+            "SixLabors.ImageSharp": {
+              "target": "Package",
+              "version": "[1.0.1, )"
             },
             "Volo.Abp.Data": {
               "target": "Package",

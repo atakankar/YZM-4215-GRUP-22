@@ -1,0 +1,73 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@model IEnumerable<Grup22.Models.Product>
+
+@{
+    ViewData["Title"] = "Ürünler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<p style="text-align:center; font:bold 30px arial, verdana;">ÜRÜNLER</p>
+@if (HttpContextAccessor.HttpContext.Session.GetInt32("factoryUserId") != null)
+{
+<p>
+    <a asp-action="Create">Yeni Ürün Ekle</a>
+</p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.productImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productStock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (item.productImageUrl != null)
+                {
+                    <td>
+                        <img class="img-responsive" src="@Html.DisplayFor(modelItem => item.productImageUrl)" width="100" height="100" />
+                    </td>
+}
+                else
+                {
+                    <td></td>
+}
+                <td>
+                    @Html.DisplayFor(modelItem => item.productName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productStock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productPrice)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.productId">Güncelle</a> |
+                    <a asp-action="Details" asp-route-id="@item.productId">Ayrıntılar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.productId">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

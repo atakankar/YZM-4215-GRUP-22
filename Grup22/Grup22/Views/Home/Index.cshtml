@@ -5,6 +5,6 @@
 }
 
 <h1 style=" text-align:center">Anasayfa</h1>
-@*<p>@HttpContextAccessor.HttpContext.Session.GetString("fact_Id")</p>
-    <p>@HttpContextAccessor.HttpContext.Session.GetString("fact_Email")</p>
-    <p>@HttpContextAccessor.HttpContext.Session.GetString("fact_Name")</p>*@
+<p>@HttpContextAccessor.HttpContext.Session.GetInt32("factoryUserId")</p>
+    <p>@HttpContextAccessor.HttpContext.Session.GetString("factoryUserEmail")</p>
+    <p>@HttpContextAccessor.HttpContext.Session.GetString("factoryUserName")</p>

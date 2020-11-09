@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@model IEnumerable<Grup22.Models.Seller>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<p style="text-align:center; font:bold 30px arial, verdana;">MEVCUT BAYİLER</p>
+@if (HttpContextAccessor.HttpContext.Session.GetInt32("factoryUserId") != null)
+{
+    <p>
+        <a asp-action="Create">Yeni Bayi Ekle</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.sellerEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sellerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sellerAdress)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sellerEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sellerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sellerAdress)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.sellerId">Düzenle</a> |
+                    <a asp-action="Details" asp-route-id="@item.sellerId">Ayrıntılar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.sellerId">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

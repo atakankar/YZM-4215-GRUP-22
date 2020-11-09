@@ -1,4 +1,4 @@
-﻿@model Grup22.Models.fact_User
+﻿@model Grup22.Models.FactoryUser
 
 @{
     ViewBag.Title = "Kayıt Ol";
@@ -27,20 +27,20 @@
                 </div>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.EditorFor(model => model.fact_Email, new { htmlAttributes = new { @class = "form-control col-9", @placeholder = "Eposta Adresi", @type = "email" } })
-                    @Html.ValidationMessageFor(model => model.fact_Email, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.factoryUserEmail, new { htmlAttributes = new { @class = "form-control col-9", @placeholder = "Eposta Adresi", @type = "email" } })
+                    @Html.ValidationMessageFor(model => model.factoryUserEmail, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-                    @Html.EditorFor(model => model.fact_Name, new { htmlAttributes = new { @class = "form-control col-9", @placeholder = "Firma Adı" } })
-                    @Html.ValidationMessageFor(model => model.fact_Name, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.factoryUserName, new { htmlAttributes = new { @class = "form-control col-9", @placeholder = "Firma Adı" } })
+                    @Html.ValidationMessageFor(model => model.factoryUserName, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-                    @Html.EditorFor(model => model.fact_Adress, new { htmlAttributes = new { @class = "form-control col-9", @placeholder = "Adres" } })
-                    @Html.ValidationMessageFor(model => model.fact_Adress, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.factoryUserAdress, new { htmlAttributes = new { @class = "form-control col-9", @placeholder = "Adres" } })
+                    @Html.ValidationMessageFor(model => model.factoryUserAdress, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-                    @Html.EditorFor(model => model.fact_Password, new { htmlAttributes = new { @class = "form-control col-9", @placeholder = "Şifre", @type = "password" } })
-                    @Html.ValidationMessageFor(model => model.fact_Password, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.factoryUserPassword, new { htmlAttributes = new { @class = "form-control col-9", @placeholder = "Şifre", @type = "password" } })
+                    @Html.ValidationMessageFor(model => model.factoryUserPassword, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <input type="submit" value="KAYIT OL" class="btn btn-primary col-9" />
