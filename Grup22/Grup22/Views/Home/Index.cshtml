@@ -4,7 +4,23 @@
     ViewData["Title"] = "Anasayfa";
 }
 
-<h1 style=" text-align:center">Anasayfa</h1>
-<p>@HttpContextAccessor.HttpContext.Session.GetInt32("factoryUserId")</p>
-    <p>@HttpContextAccessor.HttpContext.Session.GetString("factoryUserEmail")</p>
-    <p>@HttpContextAccessor.HttpContext.Session.GetString("factoryUserName")</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+        <div style="display: flex; justify-content: center; align-items: center; height: 50vh;">
+            <h1 class="display-1" style=" text-align:center">Fabrika İş Akış Sistemine Hoş Geldiniz</h1>
+            <p>@HttpContextAccessor.HttpContext.Session.GetInt32("factoryUserId")</p>
+            <p>@HttpContextAccessor.HttpContext.Session.GetString("factoryUserEmail")</p>
+            <p>@HttpContextAccessor.HttpContext.Session.GetString("factoryUserName")</p>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <h1 style="text-align: center; padding:20px;"><a href="/factoryuser/register"><span class="badge badge-primary">Kayıt Ol</span></a></h1>
+    </div>
+    <div class="col">
+        <h1 style="text-align: center; padding:20px;"><a href="/factoryuser/login"><span class="badge badge-success">Giriş Yap</span></a></h1>
+    </div>
+  </div>
+</div>

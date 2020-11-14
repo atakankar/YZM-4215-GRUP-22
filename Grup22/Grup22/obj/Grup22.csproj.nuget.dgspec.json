@@ -1,30 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\EMRE\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj": {}
+    "C:\\Users\\oguzhanbolme\\Desktop\\Projects\\YZM-4215-GRUP-22\\grup22\\grup22\\Grup22.csproj": {}
   },
   "projects": {
-    "C:\\Users\\EMRE\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj": {
+    "C:\\Users\\oguzhanbolme\\Desktop\\Projects\\YZM-4215-GRUP-22\\grup22\\grup22\\Grup22.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\EMRE\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj",
+        "projectUniqueName": "C:\\Users\\oguzhanbolme\\Desktop\\Projects\\YZM-4215-GRUP-22\\grup22\\grup22\\Grup22.csproj",
         "projectName": "Grup22",
-        "projectPath": "C:\\Users\\EMRE\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj",
-        "packagesPath": "C:\\Users\\EMRE\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\EMRE\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\obj\\",
+        "projectPath": "C:\\Users\\oguzhanbolme\\Desktop\\Projects\\YZM-4215-GRUP-22\\grup22\\grup22\\Grup22.csproj",
+        "packagesPath": "C:\\Users\\oguzhanbolme\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\oguzhanbolme\\Desktop\\Projects\\YZM-4215-GRUP-22\\grup22\\grup22\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\EMRE\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\oguzhanbolme\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
