@@ -32,13 +32,21 @@ namespace Grup22.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var kurumsalContext = _context.Products.Include(p => p.productFactoryUser).Where(x => x.productFactoryUser.factoryUserId == HttpContext.Session.GetInt32("factoryUserId"));
-            return View(await kurumsalContext.ToListAsync());
+            if (HttpContext.Session.GetInt32("isFactory") == 1)
+            {
+                var kurumsalContext = _context.Products.Include(p => p.productFactoryUser).Where(x => x.productFactoryUser.factoryUserId == HttpContext.Session.GetInt32("userId"));
+                return View(await kurumsalContext.ToListAsync());
+            }
+            else
+            {
+                var emptyContext = _context.Products.Where(x => x.factoryUserId == 0);
+                return View(emptyContext.ToList());
+            }
         }
 
         public IActionResult Create()
         {
-            if (HttpContext.Session.GetInt32("factoryUserId") == null)
+            if (HttpContext.Session.GetInt32("userId") == null || HttpContext.Session.GetInt32("isFactory") == 0)
                 return RedirectToAction(nameof(Index));
             else
                 return View();
@@ -55,7 +63,7 @@ namespace Grup22.Controllers
                     product.productImageUrl = SaveImage(uploadImage);
                 }
                 //Ürünün hangi fabrikaya ait olduğu, sisteme daha önceden giriş yapan kullanıcının session bilgileri kullanılarak veritabanına kaydedilir.
-                product.factoryUserId = (int)HttpContext.Session.GetInt32("factoryUserId");
+                product.factoryUserId = (int)HttpContext.Session.GetInt32("userId");
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

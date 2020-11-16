@@ -24,5 +24,6 @@ namespace Grup22.Models
         [Required]
         public int factoryUserId { get; set; }
         public FactoryUser sellerFactoryUser { get; set; }
+        public IEnumerable<ProductSalesRecord> sellerSalesRecord { get; set; }
     }
 }

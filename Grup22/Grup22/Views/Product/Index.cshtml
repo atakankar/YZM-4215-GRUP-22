@@ -8,7 +8,7 @@
 }
 <br />
 <p style="text-align:center; font:bold 30px arial, verdana;">ÜRÜNLER</p>
-@if (HttpContextAccessor.HttpContext.Session.GetInt32("factoryUserId") != null)
+@if (HttpContextAccessor.HttpContext.Session.GetInt32("isFactory") == 1)
 {
 <p>
     <a asp-action="Create">Yeni Ürün Ekle</a>

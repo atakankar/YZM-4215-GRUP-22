@@ -14,5 +14,6 @@ namespace Grup22.Context
         public DbSet<FactoryUser> factoryUsers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Seller> Sellers { get; set; }
+        public DbSet<ProductSalesRecord> ProductSalesRecords { get; set; }
     }
 }

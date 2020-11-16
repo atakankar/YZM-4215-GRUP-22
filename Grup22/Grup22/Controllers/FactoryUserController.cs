@@ -75,7 +75,10 @@ namespace Grup22.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            if (HttpContext.Session.GetInt32("userId") == null)
+                return View();
+            else
+                return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -91,9 +94,10 @@ namespace Grup22.Controllers
             //Böylelikle kullanıcının şifresinin güvenliği sağlanıyor.
             if (loginUser.factoryUserPassword == Crypto.Hash(user.factoryUserPassword, "MD5"))
             {
-                HttpContext.Session.SetInt32("factoryUserId", loginUser.factoryUserId);
-                HttpContext.Session.SetString("factoryUserEmail", loginUser.factoryUserEmail);
-                HttpContext.Session.SetString("factoryUserName", loginUser.factoryUserName);
+                HttpContext.Session.SetInt32("isFactory", 1);
+                HttpContext.Session.SetInt32("userId", loginUser.factoryUserId);
+                HttpContext.Session.SetString("userEmail", loginUser.factoryUserEmail);
+                HttpContext.Session.SetString("userName", loginUser.factoryUserName);
 
                 //HttpContext.Session.SetString("isUserLogin", "true"); // Yeni bir session oluşturma.
                 //HttpContext.Session.GetString("isUserLogin"); // Sessiondan değer getirme.

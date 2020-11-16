@@ -11149,24 +11149,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\oguzhanbolme\\.nuget\\packages\\": {}
+    "C:\\Users\\Furkan AY\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\oguzhanbolme\\Desktop\\Projects\\YZM-4215-GRUP-22\\grup22\\grup22\\Grup22.csproj",
+      "projectUniqueName": "C:\\Users\\Furkan AY\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj",
       "projectName": "Grup22",
-      "projectPath": "C:\\Users\\oguzhanbolme\\Desktop\\Projects\\YZM-4215-GRUP-22\\grup22\\grup22\\Grup22.csproj",
-      "packagesPath": "C:\\Users\\oguzhanbolme\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\oguzhanbolme\\Desktop\\Projects\\YZM-4215-GRUP-22\\grup22\\grup22\\obj\\",
+      "projectPath": "C:\\Users\\Furkan AY\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj",
+      "packagesPath": "C:\\Users\\Furkan AY\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Furkan AY\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\oguzhanbolme\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Furkan AY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -11291,7 +11293,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Mvc 5.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "message": "'Microsoft.AspNet.Mvc 5.2.7' paketi, proje hedef çerçevesi '.NETCoreApp,Version=v3.1' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
       "libraryId": "Microsoft.AspNet.Mvc",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"
@@ -11301,7 +11303,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Razor 3.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "message": "'Microsoft.AspNet.Razor 3.2.7' paketi, proje hedef çerçevesi '.NETCoreApp,Version=v3.1' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
       "libraryId": "Microsoft.AspNet.Razor",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"
@@ -11311,7 +11313,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.WebPages 3.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "message": "'Microsoft.AspNet.WebPages 3.2.7' paketi, proje hedef çerçevesi '.NETCoreApp,Version=v3.1' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
       "libraryId": "Microsoft.AspNet.WebPages",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"
@@ -11321,7 +11323,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.Web.Infrastructure 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "message": "'Microsoft.Web.Infrastructure 1.0.0' paketi, proje hedef çerçevesi '.NETCoreApp,Version=v3.1' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
       "libraryId": "Microsoft.Web.Infrastructure",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"

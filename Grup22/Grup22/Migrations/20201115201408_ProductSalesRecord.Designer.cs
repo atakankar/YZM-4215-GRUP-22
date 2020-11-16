@@ -4,14 +4,16 @@ using Grup22.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Grup22.Migrations
 {
     [DbContext(typeof(KurumsalContext))]
-    partial class KurumsalContextModelSnapshot : ModelSnapshot
+    [Migration("20201115201408_ProductSalesRecord")]
+    partial class ProductSalesRecord
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

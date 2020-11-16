@@ -2,7 +2,7 @@
 
 namespace Grup22.Migrations
 {
-    public partial class Product : Migration
+    public partial class ProductSalesRecord : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

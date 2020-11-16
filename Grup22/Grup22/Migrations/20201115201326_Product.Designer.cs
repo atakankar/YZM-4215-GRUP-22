@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Grup22.Migrations
 {
     [DbContext(typeof(KurumsalContext))]
-    [Migration("20201109130813_Product")]
+    [Migration("20201115201326_Product")]
     partial class Product
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,6 +88,37 @@ namespace Grup22.Migrations
                     b.ToTable("Ürün");
                 });
 
+            modelBuilder.Entity("Grup22.Models.ProductSalesRecord", b =>
+                {
+                    b.Property<int>("salesRecordId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MyProperty")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("salesRecordAmount")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("salesRecordConfirmation")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("sellerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("salesRecordId");
+
+                    b.HasIndex("productId");
+
+                    b.HasIndex("sellerId");
+
+                    b.ToTable("Ürün Satış Kaydı");
+                });
+
             modelBuilder.Entity("Grup22.Models.Seller", b =>
                 {
                     b.Property<int>("sellerId")
@@ -130,6 +161,19 @@ namespace Grup22.Migrations
                         .HasForeignKey("factoryUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Grup22.Models.ProductSalesRecord", b =>
+                {
+                    b.HasOne("Grup22.Models.Product", "salesRecordProduct")
+                        .WithMany()
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Grup22.Models.Seller", null)
+                        .WithMany("sellerSalesRecord")
+                        .HasForeignKey("sellerId");
                 });
 
             modelBuilder.Entity("Grup22.Models.Seller", b =>

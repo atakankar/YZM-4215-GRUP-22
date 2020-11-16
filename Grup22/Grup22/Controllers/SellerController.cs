@@ -23,13 +23,21 @@ namespace Grup22.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var kurumsalContext = _context.Sellers.Include(s => s.sellerFactoryUser).Where(x => x.factoryUserId == HttpContext.Session.GetInt32("factoryUserId"));
-            return View(await kurumsalContext.ToListAsync());
+            if (HttpContext.Session.GetInt32("isFactory") == 1)
+            {
+                var kurumsalContext = _context.Sellers.Include(s => s.sellerFactoryUser).Where(x => x.factoryUserId == HttpContext.Session.GetInt32("userId"));
+                return View(await kurumsalContext.ToListAsync());
+            }
+            else
+            {
+                var emptyContext = _context.Sellers.Where(x => x.factoryUserId == 0);
+                return View(emptyContext.ToList());
+            }
         }
 
         public IActionResult Create()
         {
-            if (HttpContext.Session.GetInt32("factoryUserId") == null)
+            if (HttpContext.Session.GetInt32("userId") == null || HttpContext.Session.GetInt32("isFactory") == 0)
                 return RedirectToAction(nameof(Index));
             return View();
         }
@@ -40,7 +48,7 @@ namespace Grup22.Controllers
         {
             if (ModelState.IsValid)
             {
-                seller.factoryUserId = (int)HttpContext.Session.GetInt32("factoryUserId");
+                seller.factoryUserId = (int)HttpContext.Session.GetInt32("userId");
                 seller.sellerPassword = Crypto.Hash(seller.sellerPassword, "MD5");
                 _context.Add(seller);
                 await _context.SaveChangesAsync();
