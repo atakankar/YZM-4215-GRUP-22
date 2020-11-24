@@ -1,0 +1,55 @@
+﻿@model Grup22.Models.ProductSalesRecord
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "EditOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Siparişi Düzenle</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditOrder">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="salesRecordId" />
+            <div class="form-group">
+                <label class="control-label">Ürün İsmi:</label>
+                <hr />
+                <label class="control-label">@ViewBag.name</label>
+                <br />
+            </div>
+            <input type="hidden" asp-for="salesRecordConfirmation" />
+            <div class="form-group">
+                <div class="control-label" style="color:red">@ViewBag.error</div>
+            </div>
+            <div class="form-group">
+                <label asp-for="salesRecordAmount" class="control-label"></label>
+                <input asp-for="salesRecordAmount" class="form-control" />
+                <span asp-validation-for="salesRecordAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Toplam Sipariş Tutarı:</label>
+                <hr />
+                <label class="control-label">@ViewBag.totalPrice TL</label>
+                <br />
+            </div>
+            <input asp-for="sellerId" type="hidden" />
+            <input asp-for="productId" type="hidden" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+        @if (HttpContextAccessor.HttpContext.Session.GetInt32("isFactory") == 0)
+        {
+            <a asp-action="DeleteOrder" asp-route-id="@Model.salesRecordId">İptal Et</a>
+        }
+        else if(HttpContextAccessor.HttpContext.Session.GetInt32("isFactory") == 1)
+        {
+            <a asp-action="AcceptOrder" asp-route-id="@Model.salesRecordId">Onayla</a>
+            <a asp-action="RejectOrder" asp-route-id="@Model.salesRecordId">Reddet</a>
+        }
+    </div>
+</div>
+

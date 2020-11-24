@@ -32,30 +32,31 @@ namespace Grup22.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Login(FactoryUser user)
         {
             Seller loginUser = _context.Sellers.FirstOrDefault(x => x.sellerEmail == user.factoryUserEmail);
             if (loginUser == null)
             {
                 ViewBag.error = "Böyle bir kullanıcı kayıtlı değil";
-                return View();
+                return View("~/Views/FactoryUser/Login.cshtml");
             }
             if (loginUser.sellerPassword == Crypto.Hash(user.factoryUserPassword, "MD5"))
             {
                 HttpContext.Session.SetInt32("isFactory", 0);
-                HttpContext.Session.SetInt32("userId", loginUser.factoryUserId);
+                HttpContext.Session.SetInt32("userId", loginUser.sellerId);
                 HttpContext.Session.SetString("userEmail", loginUser.sellerEmail);
                 HttpContext.Session.SetString("userName", loginUser.sellerName);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("IndexForSeller", "Product");
             }
             ViewBag.error = "Yanlış Şifre";
-            return View();
+            return View("~/Views/FactoryUser/Login.cshtml");
         }
 
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Login");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -93,7 +94,7 @@ namespace Grup22.Controllers
                 smtp.Disconnect(true);
                 ViewBag.error = "Yeni şifreniz Email adresinize gönderildi!";
             }
-            return View();
+            return View("~/Views/FactoryUser/ForgotPassword.cshtml");
         }
     }
 }

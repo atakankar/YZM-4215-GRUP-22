@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Tuple<Grup22.Models.ProductSalesRecord, Grup22.Models.Product>>
+
+@{
+    ViewData["Title"] = "IndexSalesRecords";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Gerçekleşen Siparişlerin Kayıtları</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Ürün İsmi
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item1.salesRecordAmount)
+            </th>
+            <th>
+                Fabrika Adresi
+            </th>
+            <th>
+                Bayi Adresi
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item2.productName)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item1.salesRecordAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item2.productFactoryUser.factoryUserAdress)
+                </td>
+                <td>@*@Html.DisplayFor(modelItem => item.Item1.salesRecordProduct)*@</td>
+            </tr>
+        }
+    </tbody>
+</table>

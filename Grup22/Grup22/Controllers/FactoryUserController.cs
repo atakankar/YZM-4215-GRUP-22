@@ -82,6 +82,7 @@ namespace Grup22.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Login(FactoryUser user)
         {
             FactoryUser loginUser = _context.factoryUsers.FirstOrDefault(x => x.factoryUserEmail == user.factoryUserEmail);
@@ -103,7 +104,7 @@ namespace Grup22.Controllers
                 //HttpContext.Session.GetString("isUserLogin"); // Sessiondan değer getirme.
                 //HttpContext.Session.Clear(); // Tüm sessionları temizleme.
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Product");
             }
             ViewBag.error = "Yanlış Şifre";
             return View();
@@ -112,7 +113,7 @@ namespace Grup22.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Login");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]

@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Furkan AY\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj": {}
+    "C:\\Users\\EMRE\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Furkan AY\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj": {
+    "C:\\Users\\EMRE\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Furkan AY\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj",
+        "projectUniqueName": "C:\\Users\\EMRE\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj",
         "projectName": "Grup22",
-        "projectPath": "C:\\Users\\Furkan AY\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj",
-        "packagesPath": "C:\\Users\\Furkan AY\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Furkan AY\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\obj\\",
+        "projectPath": "C:\\Users\\EMRE\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj",
+        "packagesPath": "C:\\Users\\EMRE\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\EMRE\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Furkan AY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\EMRE\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

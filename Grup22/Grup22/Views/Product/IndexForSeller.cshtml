@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Grup22.Models.Product>
+
+@{
+    ViewData["Title"] = "IndexForSeller";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>IndexForSeller</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.productImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productStock)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @if (item.productImageUrl != null)
+            {
+                <td>
+                    <img class="img-responsive" src="@Html.DisplayFor(modelItem => item.productImageUrl)" width="100" height="100" />
+                </td>
+            }
+            else
+            {
+                <td></td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productStock)
+            </td>
+            <td>
+                <a asp-controller="Sales" asp-action="CreateOrder" asp-route-id="@item.productId">Sipariş Oluştur</a> | 
+                <a asp-action="Details" asp-route-id="@item.productId">Ayrıntılar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Tuple<Grup22.Models.ProductSalesRecord, Grup22.Models.Product>>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "ShowOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>İşlemdeki Siparişler</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Ürün Adı
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item1.salesRecordAmount)
+            </th>
+            <th>
+                Ürünün Birim Fiyatı
+            </th>
+            @*<th>
+                Toplam Tutar
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item2.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1.salesRecordAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item2.productPrice)
+            </td>
+            @*<td>
+                @{
+                    var amount = item.Item1.salesRecordAmount;
+                    var price = item.Item2.productPrice;
+                    Html.DisplayText((price * amount).ToString());
+            } TL
+            </td>*@
+            <td>
+                @if (HttpContextAccessor.HttpContext.Session.GetInt32("isFactory") == 0)
+                {
+                    <a asp-action="EditOrder" asp-route-id="@item.Item1.salesRecordId">Düzenle</a>
+                    <a asp-action="DeleteOrder" asp-route-id="@item.Item1.salesRecordId">İptal Et</a>
+                }
+                else if(HttpContextAccessor.HttpContext.Session.GetInt32("isFactory") == 1)
+                {
+                    <a asp-action="EditOrder" asp-route-id="@item.Item1.salesRecordId">Detay</a>
+                    <a asp-action="AcceptOrder" asp-route-id="@item.Item1.salesRecordId">Onayla</a>
+                    <a asp-action="RejectOrder" asp-route-id="@item.Item1.salesRecordId">Reddet</a>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

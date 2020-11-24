@@ -30,12 +30,38 @@ namespace Grup22.Controllers
             _hostingEnvironment = environment;
         }
 
+        //Bu Action, Fabrika'nın kullanacağı ürün listeleme sayfasına yönlendirir.
         public async Task<IActionResult> Index()
         {
             if (HttpContext.Session.GetInt32("isFactory") == 1)
             {
+                //Veritabanından fabrikanın kendi ürünleri aranıyor ve View'a gönderiliyor.
                 var kurumsalContext = _context.Products.Include(p => p.productFactoryUser).Where(x => x.productFactoryUser.factoryUserId == HttpContext.Session.GetInt32("userId"));
                 return View(await kurumsalContext.ToListAsync());
+            }
+            //İçeride tekrardan bayi veya fabrika sorgusu yapılıyor tedbir olarak. Eğer bayi bu sayfayı açmaya çalışırsa kendi için hazırlanan Action'a yönlendiriliyor.
+            else if (HttpContext.Session.GetInt32("isFactory") == 0)
+                return RedirectToAction(nameof(IndexForSeller));
+            else
+            {
+                //Oturum açılmamışsa boş bir liste döndürülüyor.
+                var emptyContext = _context.Products.Where(x => x.factoryUserId == 0);
+                return View(emptyContext.ToList());
+            }
+        }
+
+        //Bu Action, Bayinin'ın kullanacağı ürün listeleme sayfasına yönlendirir.
+        public async Task<IActionResult> IndexForSeller()
+        {
+            if (HttpContext.Session.GetInt32("isFactory") == 0)
+            {
+                //Sisteme giriş yapmış olan bayinin bağlı olduğu fabrikanın ürünleri veritabanında bulunuyor.
+                var kurumsalContext = _context.Products.Include(p => p.productFactoryUser).Where(x => x.productFactoryUser.factoryUserId == _context.Sellers.Include(s => s.sellerFactoryUser).FirstOrDefault(i => i.sellerId == HttpContext.Session.GetInt32("userId")).sellerFactoryUser.factoryUserId);
+                return View(await kurumsalContext.ToListAsync());
+            }
+            else if(HttpContext.Session.GetInt32("isFactory") == 1)
+            {
+                return RedirectToAction(nameof(Index));
             }
             else
             {

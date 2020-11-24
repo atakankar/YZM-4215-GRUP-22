@@ -25,13 +25,7 @@
                 @Html.DisplayNameFor(model => model.productName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.productDescription)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.productStock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.productPrice)
             </th>
             <th></th>
         </tr>
@@ -45,22 +39,16 @@
                     <td>
                         <img class="img-responsive" src="@Html.DisplayFor(modelItem => item.productImageUrl)" width="100" height="100" />
                     </td>
-}
+                }
                 else
                 {
                     <td></td>
-}
+                }
                 <td>
                     @Html.DisplayFor(modelItem => item.productName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.productDescription)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.productStock)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.productPrice)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.productId">Güncelle</a> |

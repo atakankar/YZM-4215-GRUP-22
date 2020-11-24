@@ -61,7 +61,6 @@ namespace Grup22.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     salesRecordConfirmation = table.Column<bool>(nullable: false),
                     salesRecordAmount = table.Column<int>(nullable: false),
-                    MyProperty = table.Column<int>(nullable: false),
                     productId = table.Column<int>(nullable: false),
                     sellerId = table.Column<int>(nullable: true)
                 },

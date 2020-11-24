@@ -93,9 +93,6 @@ namespace Grup22.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("MyProperty")
-                        .HasColumnType("int");
-
                     b.Property<int>("productId")
                         .HasColumnType("int");
 

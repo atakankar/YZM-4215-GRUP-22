@@ -788,3 +788,8 @@ C:\Users\Furkan AY\Source\Repos\atakankar\YZM-4215-GRUP-22\Grup22\Grup22\obj\Deb
 C:\Users\Furkan AY\Source\Repos\atakankar\YZM-4215-GRUP-22\Grup22\Grup22\obj\Debug\netcoreapp3.1\Grup22.dll
 C:\Users\Furkan AY\Source\Repos\atakankar\YZM-4215-GRUP-22\Grup22\Grup22\obj\Debug\netcoreapp3.1\Grup22.pdb
 C:\Users\Furkan AY\Source\Repos\atakankar\YZM-4215-GRUP-22\Grup22\Grup22\obj\Debug\netcoreapp3.1\Grup22.genruntimeconfig.cache
+C:\Users\EMRE\Source\Repos\atakankar\YZM-4215-GRUP-22\Grup22\Grup22\obj\Debug\netcoreapp3.1\Razor\Views\Product\IndexForSeller.cshtml.g.cs
+C:\Users\EMRE\Source\Repos\atakankar\YZM-4215-GRUP-22\Grup22\Grup22\obj\Debug\netcoreapp3.1\Razor\Views\Sales\ShowOrders.cshtml.g.cs
+C:\Users\EMRE\Source\Repos\atakankar\YZM-4215-GRUP-22\Grup22\Grup22\obj\Debug\netcoreapp3.1\Razor\Views\Sales\CreateOrder.cshtml.g.cs
+C:\Users\EMRE\Source\Repos\atakankar\YZM-4215-GRUP-22\Grup22\Grup22\obj\Debug\netcoreapp3.1\Razor\Views\Sales\EditOrder.cshtml.g.cs
+C:\Users\EMRE\Source\Repos\atakankar\YZM-4215-GRUP-22\Grup22\Grup22\obj\Debug\netcoreapp3.1\Razor\Views\Sales\IndexSalesRecords.cshtml.g.cs

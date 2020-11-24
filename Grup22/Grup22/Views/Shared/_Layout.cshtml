@@ -11,14 +11,16 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <div class="sidenav">
-        <a href="#">@HttpContextAccessor.HttpContext.Session.GetString("userName");</a>
+    <div id="mySidenav" class="sidenav">              
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="float: right">&times;</a>
+        <a href="#">@HttpContextAccessor.HttpContext.Session.GetString("userName")</a>
         <a href="/Product/Index">Ürünler</a>
         <a href="/Seller/Index">Bayi İşlemleri</a>
         <a href="/Home/Privacy">Privacy</a>
         <a href="/FactoryUser/Logout">Logout</a>
     </div>
-    <div class="container">
+    <span onclick="openNav()">&equiv;</span>
+    <div id="main1" class="main">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -35,7 +37,7 @@
     /* The sidebar menu */
     .sidenav {
         height: 100%; /* Full-height: remove this if you want "auto" height */
-        width: 250px; /* Set the width of the sidebar */
+        width: 200px; /* Set the width of the sidebar */
         position: fixed; /* Fixed Sidebar (stay in place on scroll) */
         z-index: 1; /* Stay on top */
         top: 0; /* Stay at the top */
@@ -61,7 +63,22 @@
 
     /* Style page content */
     .main {
-        margin-left: 160px; /* Same as the width of the sidebar */
+        margin-left: 200px; /* Same as the width of the sidebar */
         padding: 0px 10px;
     }
 </style>
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "200px";
+        document.getElementById("main1").style.marginLeft = "200px";
+    }
+
+    /* Set the width of the side navigation to 0 */
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main1").style.margin = "0";
+    }
+</script>
+
+

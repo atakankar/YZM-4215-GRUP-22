@@ -5908,7 +5908,7 @@
       ]
     },
     "NuGet.Frameworks/4.7.0": {
-      "sha512": "qbXaB76XYUVLocLBs8Z9TS/ERGK2wm797feO+0JEPFvT7o7MRadOR77mqaSD4J1k8G+DlZQyq+MlkCuxrkr3ag==",
+      "sha512": "KuqDbPzjOWbUM6gPMbkvdhlQ10roQAoMM7mNZ8hcY/fH+9J4Zc+qT8dLWoNzGyr0OrxQVdZdbSjy/fxwoICgGg==",
       "type": "package",
       "path": "nuget.frameworks/4.7.0",
       "files": [
@@ -6481,7 +6481,7 @@
       ]
     },
     "System.Buffers/4.5.0": {
-      "sha512": "pL2ChpaRRWI/p4LXyy4RgeWlYF2sgfj/pnVMvBqwNFr5cXg7CXNnWZWxrOONLg8VGdFB8oB+EG2Qw4MLgTOe+A==",
+      "sha512": "09yL/QiPEDZI9JLg0R0OcGe/0ycFm69QN16DCvXkqkIorCC1Y2EKwk5KvSlfMmGse+LcKkD3H+Cra7fFkxHXEg==",
       "type": "package",
       "path": "system.buffers/4.5.0",
       "files": [
@@ -8821,7 +8821,7 @@
       ]
     },
     "System.Reflection.Metadata/1.6.0": {
-      "sha512": "COC1aiAJjCoA5GBF+QKL2uLqEBew4JsCkQmoHKbN3TlOZKa2fKLz5CpiRQKDz0RsAOEGsVKqOD5bomsXq/4STQ==",
+      "sha512": "I4aWCii7N1bmn43vviRfJQYW6UAco1G/CcjJouvgGdb/sr2BRTSnddhaPMg2oxu9VHFn8T1z3dTLq0pna8zmtA==",
       "type": "package",
       "path": "system.reflection.metadata/1.6.0",
       "files": [
@@ -10101,7 +10101,7 @@
       ]
     },
     "System.Security.Cryptography.Xml/4.5.0": {
-      "sha512": "i2Jn6rGXR63J0zIklImGRkDIJL4b1NfPSEbIVHBlqoIb12lfXIigCbDRpDmIEzwSo/v1U5y/rYJdzZYSyCWxvg==",
+      "sha512": "UvxfrEg7YG7U6BQO8WdQ4Nu1LFt2lqYQnoZefaK/2RDvjYdJ+norsVe4dwOqo14XiipgYY5xNUo6VhQXNbl2vg==",
       "type": "package",
       "path": "system.security.cryptography.xml/4.5.0",
       "files": [
@@ -10415,7 +10415,7 @@
       ]
     },
     "System.Text.Encodings.Web/4.5.0": {
-      "sha512": "Xg4G4Indi4dqP1iuAiMSwpiWS54ZghzR644OtsRCm/m/lBMG8dUBhLVN7hLm8NNrNTR+iGbshCPTwrvxZPlm4g==",
+      "sha512": "JF+wDdfFiRl3rz3dPMfR6aR568AW2J5CUMmhSflgHDz4zbVK4/00ax8UHnHyEMvblPewgNugjuA4oyoL8Pex2g==",
       "type": "package",
       "path": "system.text.encodings.web/4.5.0",
       "files": [
@@ -11149,19 +11149,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Furkan AY\\.nuget\\packages\\": {}
+    "C:\\Users\\EMRE\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Furkan AY\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj",
+      "projectUniqueName": "C:\\Users\\EMRE\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj",
       "projectName": "Grup22",
-      "projectPath": "C:\\Users\\Furkan AY\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj",
-      "packagesPath": "C:\\Users\\Furkan AY\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Furkan AY\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\obj\\",
+      "projectPath": "C:\\Users\\EMRE\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\Grup22.csproj",
+      "packagesPath": "C:\\Users\\EMRE\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\EMRE\\Source\\Repos\\atakankar\\YZM-4215-GRUP-22\\Grup22\\Grup22\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Furkan AY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\EMRE\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
