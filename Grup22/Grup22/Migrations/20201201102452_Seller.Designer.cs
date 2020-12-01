@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Grup22.Migrations
 {
     [DbContext(typeof(KurumsalContext))]
-    [Migration("20201123161931_ProductSalesRecord")]
-    partial class ProductSalesRecord
+    [Migration("20201201102452_Seller")]
+    partial class Seller
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -95,7 +95,13 @@ namespace Grup22.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("productId")
+                    b.Property<DateTime?>("orderCompletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("orderCreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("productId")
                         .HasColumnType("int");
 
                     b.Property<int>("salesRecordAmount")
@@ -164,9 +170,7 @@ namespace Grup22.Migrations
                 {
                     b.HasOne("Grup22.Models.Product", "salesRecordProduct")
                         .WithMany()
-                        .HasForeignKey("productId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("productId");
 
                     b.HasOne("Grup22.Models.Seller", null)
                         .WithMany("sellerSalesRecord")

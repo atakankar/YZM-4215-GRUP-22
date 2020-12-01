@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Tuple<Grup22.Models.ProductSalesRecord, Grup22.Models.Product>>
 
 @{
-    ViewData["Title"] = "IndexSalesRecords";
+    ViewData["Title"] = "Satış Kayıtları";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Gerçekleşen Siparişlerin Kayıtları</h1>
+<h1>Satış Kayıtları</h1>
 
 <table class="table">
     <thead>
@@ -17,11 +17,17 @@
                 @Html.DisplayNameFor(model => model.Item1.salesRecordAmount)
             </th>
             <th>
-                Fabrika Adresi
+                Toplam Ödenen Ücret
             </th>
             <th>
-                Bayi Adresi
+                Sipariş Oluşturulma Tarihi
             </th>
+            <th>
+                Sipariş Tamamlanma Tarihi
+            </th>
+            @*<th>
+                Bayi Adresi
+            </th>*@
         </tr>
     </thead>
     <tbody>
@@ -29,14 +35,31 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Item2.productName)</td>
+                    @Html.DisplayFor(modelItem => item.Item2.productName)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Item1.salesRecordAmount)
                 </td>
                 <td>
+                    @{
+                        var amount = item.Item1.salesRecordAmount;
+                        var price = item.Item2.productPrice;
+                        string totalPrice = (price * amount).ToString();
+                    }
+                    @totalPrice TL
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item1.orderCreationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item1.orderCompletionDate)
+                </td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.Item2.productFactoryUser.factoryUserAdress)
                 </td>
-                <td>@*@Html.DisplayFor(modelItem => item.Item1.salesRecordProduct)*@</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item1.salesRecordProduct)
+                </td>*@
             </tr>
         }
     </tbody>

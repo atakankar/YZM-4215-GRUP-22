@@ -3,16 +3,15 @@
 @model IEnumerable<Grup22.Models.Seller>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Bayiler";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br />
 <p style="text-align:center; font:bold 30px arial, verdana;">MEVCUT BAYİLER</p>
 @if (HttpContextAccessor.HttpContext.Session.GetInt32("isFactory") == 1)
 {
-    <p>
-        <a asp-action="Create">Yeni Bayi Ekle</a>
-    </p>
+
+<button type="button" class="btn btn-primary btn-lg" onclick="window.location.href= '/Seller/Create'" style="">Yeni Bayi Ekle</button>
 }
 <table class="table">
     <thead>
@@ -43,9 +42,10 @@
                     @Html.DisplayFor(modelItem => item.sellerAdress)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.sellerId">Düzenle</a> |
-                    <a asp-action="Details" asp-route-id="@item.sellerId">Ayrıntılar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.sellerId">Sil</a>
+                    <div class="btn-group btn-group-lg">
+                        <button type="button" class="btn btn-default" onclick="window.location.href= '/Seller/Edit/@item.sellerId'">Düzenle</button>
+                        <button type="button" class="btn btn-danger" onclick="window.location.href= '/Seller/Delete/@item.sellerId'">Sil</button>
+                    </div>
                 </td>
             </tr>
         }

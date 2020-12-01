@@ -62,6 +62,7 @@ namespace Grup22.Controllers
                 newSalesRecord.salesRecordConfirmation = false;
                 newSalesRecord.salesRecordProduct = _context.Products.Find(saleProductId);
                 newSalesRecord.sellerId = (int)HttpContext.Session.GetInt32("userId");
+                newSalesRecord.orderCreationDate = DateTime.Now;
                 _context.ProductSalesRecords.Add(newSalesRecord);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(ShowOrders));
@@ -82,20 +83,22 @@ namespace Grup22.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditOrder(ProductSalesRecord editRecord)
+        public IActionResult EditOrder(ProductSalesRecord salesRecord)
         {
-            Product _product = _context.Products.Find(editRecord.productId);
-            if (editRecord.salesRecordAmount == 0)
+            Product _product = _context.Products.Find(salesRecord.productId);
+            if (salesRecord.salesRecordAmount == 0)
                 ViewBag.error = "0 ürün sipariş edilemez.";
-            else if (editRecord.salesRecordAmount <= _product.productStock)
+            else if (salesRecord.salesRecordAmount <= _product.productStock)
             {
-                _context.ProductSalesRecords.Update(editRecord);
+                //_context.ProductSalesRecords.Update(editRecord);
+                ProductSalesRecord editRecord = _context.ProductSalesRecords.Find(salesRecord.salesRecordId);
+                editRecord.salesRecordAmount = salesRecord.salesRecordAmount;
                 _context.SaveChanges();
                 return RedirectToAction(nameof(ShowOrders));
             }
             else
                 ViewBag.error = "Stokta istenen miktarda ürün bulunmamaktadır.";
-            return View(editRecord);
+            return View(salesRecord);
             }
 
         public IActionResult DeleteOrder(int id)
@@ -109,7 +112,9 @@ namespace Grup22.Controllers
         [HttpPost]
         public IActionResult DetailOrder(ProductSalesRecord salesRecord)
         {
-            _context.ProductSalesRecords.Update(salesRecord);
+            //_context.ProductSalesRecords.Update(salesRecord);
+            ProductSalesRecord editRecord = _context.ProductSalesRecords.Find(salesRecord.salesRecordId);
+            editRecord.salesRecordAmount = salesRecord.salesRecordAmount;
             _context.SaveChanges();
             return RedirectToAction(nameof(ShowOrders));
         }
@@ -118,6 +123,7 @@ namespace Grup22.Controllers
         {
             ProductSalesRecord acceptedRecord = _context.ProductSalesRecords.Find(id);
             acceptedRecord.salesRecordConfirmation = true;
+            acceptedRecord.orderCompletionDate = DateTime.Now;
             Product _product = _context.Products.Find(acceptedRecord.productId);
             _product.productStock = _product.productStock - acceptedRecord.salesRecordAmount;
             _context.SaveChanges();
@@ -135,13 +141,13 @@ namespace Grup22.Controllers
         {
             if(HttpContext.Session.GetInt32("isFactory") == 0)
             { 
-                var index = _context.ProductSalesRecords.Where(w => w.salesRecordConfirmation == true && w.sellerId == HttpContext.Session.GetInt32("userId")).Join(_context.Products, record => record.productId, product => product.productId,
+                var index = _context.ProductSalesRecords.Where(w => w.salesRecordConfirmation == true && w.sellerId == HttpContext.Session.GetInt32("userId")).Join(_context.Products.Include(i => i.productFactoryUser), record => record.productId, product => product.productId,
                     (record, product) => Tuple.Create(record, product)).ToList();
                 return View(index);
             }
             else if(HttpContext.Session.GetInt32("isFactory") == 1)
             {
-                var index = _context.ProductSalesRecords.Where(w => w.salesRecordConfirmation == true && w.salesRecordProduct.factoryUserId == HttpContext.Session.GetInt32("userId")).Join(_context.Products, record => record.productId, product => product.productId,
+                var index = _context.ProductSalesRecords.Where(w => w.salesRecordConfirmation == true && w.salesRecordProduct.factoryUserId == HttpContext.Session.GetInt32("userId")).Join(_context.Products.Include(i => i.productFactoryUser), record => record.productId, product => product.productId,
                     (record, product) => Tuple.Create(record, product)).ToList();
                 return View(index);
             }

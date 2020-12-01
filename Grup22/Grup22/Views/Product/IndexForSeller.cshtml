@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Grup22.Models.Product>
 
 @{
-    ViewData["Title"] = "IndexForSeller";
+    ViewData["Title"] = "Ürünler";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>IndexForSeller</h1>
+<br />
+<p style="text-align:center; font:bold 30px arial, verdana;">ÜRÜNLER</p>
 
 <table class="table">
     <thead>
@@ -42,8 +42,10 @@
                 @Html.DisplayFor(modelItem => item.productStock)
             </td>
             <td>
-                <a asp-controller="Sales" asp-action="CreateOrder" asp-route-id="@item.productId">Sipariş Oluştur</a> | 
-                <a asp-action="Details" asp-route-id="@item.productId">Ayrıntılar</a>
+                <div class="btn-group btn-group-lg">
+                    <button type="button" class="btn btn-default" onclick="window.location.href= '/Sales/CreateOrder/@item.productId'">Sipariş Oluştur</button>
+                    <button type="button" class="btn btn-default" onclick="window.location.href= '/Product/Details/@item.productId'">Ayrıntılar</button>
+                </div>
             </td>
         </tr>
 }

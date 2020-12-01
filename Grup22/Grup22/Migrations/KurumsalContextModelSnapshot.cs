@@ -93,6 +93,12 @@ namespace Grup22.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime?>("orderCompletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("orderCreationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("productId")
                         .HasColumnType("int");
 

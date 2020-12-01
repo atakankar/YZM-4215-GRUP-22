@@ -87,7 +87,8 @@ namespace Grup22.Controllers
                 {
                     Seller editSeller = _context.Sellers.Find(id);
                     editSeller.sellerEmail = seller.sellerEmail;
-                    editSeller.sellerPassword = seller.sellerPassword = Crypto.Hash(seller.sellerPassword, "MD5");
+                    if(seller.sellerPassword != editSeller.sellerPassword)
+                        editSeller.sellerPassword = seller.sellerPassword = Crypto.Hash(seller.sellerPassword, "MD5");
                     editSeller.sellerName = seller.sellerName;
                     editSeller.sellerAdress = seller.sellerAdress;
                     await _context.SaveChangesAsync();

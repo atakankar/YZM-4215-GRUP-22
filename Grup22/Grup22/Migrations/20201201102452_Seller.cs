@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Grup22.Migrations
 {
-    public partial class Product : Migration
+    public partial class Seller : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,8 +62,10 @@ namespace Grup22.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     salesRecordConfirmation = table.Column<bool>(nullable: false),
                     salesRecordAmount = table.Column<int>(nullable: false),
-                    productId = table.Column<int>(nullable: false),
-                    sellerId = table.Column<int>(nullable: true)
+                    orderCreationDate = table.Column<DateTime>(nullable: false),
+                    orderCompletionDate = table.Column<DateTime>(nullable: true),
+                    sellerId = table.Column<int>(nullable: true),
+                    productId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,7 +75,7 @@ namespace Grup22.Migrations
                         column: x => x.productId,
                         principalTable: "Ürün",
                         principalColumn: "productId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Ürün Satış Kaydı_Bayi_sellerId",
                         column: x => x.sellerId,

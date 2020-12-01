@@ -10,9 +10,7 @@
 <p style="text-align:center; font:bold 30px arial, verdana;">ÜRÜNLER</p>
 @if (HttpContextAccessor.HttpContext.Session.GetInt32("isFactory") == 1)
 {
-<p>
-    <a asp-action="Create">Yeni Ürün Ekle</a>
-</p>
+<button type="button" class="btn btn-primary btn-lg" onclick="window.location.href= '/Product/Create'" style="">Yeni Ürün Ekle</button>
 }
 
 <table class="table">
@@ -51,9 +49,11 @@
                     @Html.DisplayFor(modelItem => item.productStock)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.productId">Güncelle</a> |
-                    <a asp-action="Details" asp-route-id="@item.productId">Ayrıntılar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.productId">Sil</a>
+                    <div class="btn-group btn-group-lg">
+                        <button type="button" class="btn btn-default" onclick="window.location.href= '/Product/Edit/@item.productId'">Güncelle</button>
+                        <button type="button" class="btn btn-default" onclick="window.location.href= '/Product/Details/@item.productId'">Ayrıntılar</button>
+                        <button type="button" class="btn btn-danger" onclick="window.location.href= '/Product/Delete/@item.productId'">Sil</button>
+                    </div>
                 </td>
             </tr>
         }
