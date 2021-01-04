@@ -83,15 +83,34 @@ namespace Grup22.Controllers
         public async Task<IActionResult> Create([Bind("productId,productName,productDescription,productStock,productPrice,productImageUrl")] Product product, IFormFile uploadImage)
         {
             if (ModelState.IsValid)
-            {
-                if (uploadImage != null)
+            {   
+                try
                 {
-                    product.productImageUrl = SaveImage(uploadImage);
+                    if (uploadImage != null)
+                    {
+                        product.productImageUrl = SaveImage(uploadImage);
+                    }
+                    //Ürünün hangi fabrikaya ait olduğu, sisteme daha önceden giriş yapan kullanıcının session bilgileri kullanılarak veritabanına kaydedilir.
+                    product.factoryUserId = (int)HttpContext.Session.GetInt32("userId");
+                    _context.Add(product);
+                    await _context.SaveChangesAsync();
                 }
-                //Ürünün hangi fabrikaya ait olduğu, sisteme daha önceden giriş yapan kullanıcının session bilgileri kullanılarak veritabanına kaydedilir.
-                product.factoryUserId = (int)HttpContext.Session.GetInt32("userId");
-                _context.Add(product);
-                await _context.SaveChangesAsync();
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProductExists(product.productId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                catch (UnknownImageFormatException)
+                {
+                    ViewBag.message = "Lütfen .png veya .jpeg formatında resim yükleyiniz.";
+                    return View();
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(product);
@@ -165,6 +184,11 @@ namespace Grup22.Controllers
                     {
                         throw;
                     }
+                }
+                catch (UnknownImageFormatException)
+                {
+                    ViewBag.message = "Lütfen .png veya .jpeg formatında resim yükleyiniz.";
+                    return View();
                 }
                 return RedirectToAction(nameof(Index));
             }
