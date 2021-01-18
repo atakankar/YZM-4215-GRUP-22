@@ -36,7 +36,8 @@ namespace Grup22.Controllers
             if (HttpContext.Session.GetInt32("isFactory") == 1)
             {
                 //Veritabanından fabrikanın kendi ürünleri aranıyor ve View'a gönderiliyor.
-                var kurumsalContext = _context.Products.Include(p => p.productFactoryUser).Where(x => x.productFactoryUser.factoryUserId == HttpContext.Session.GetInt32("userId"));
+                //var kurumsalContext = _context.Products.Include(p => p.productFactoryUser).Where(x => x.productFactoryUser.factoryUserId == HttpContext.Session.GetInt32("userId"));
+                var kurumsalContext = _context.Products.FromSqlRaw($"getProduct {HttpContext.Session.GetInt32("userId")}");
                 return View(await kurumsalContext.ToListAsync());
             }
             //İçeride tekrardan bayi veya fabrika sorgusu yapılıyor tedbir olarak. Eğer bayi bu sayfayı açmaya çalışırsa kendi için hazırlanan Action'a yönlendiriliyor.

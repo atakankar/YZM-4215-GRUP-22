@@ -16,6 +16,9 @@ namespace Grup22.Migrations
                     sellerEmail = table.Column<string>(maxLength: 30, nullable: false),
                     sellerPassword = table.Column<string>(nullable: false),
                     sellerName = table.Column<string>(maxLength: 50, nullable: false),
+                    sellerOwnersName = table.Column<string>(maxLength: 50, nullable: false),
+                    sellerCityName = table.Column<string>(maxLength: 100, nullable: false),
+                    sellerTownName = table.Column<string>(maxLength: 50, nullable: false),
                     sellerAdress = table.Column<string>(nullable: false),
                     factoryUserId = table.Column<int>(nullable: false)
                 },
@@ -65,7 +68,7 @@ namespace Grup22.Migrations
                     orderCreationDate = table.Column<DateTime>(nullable: false),
                     orderCompletionDate = table.Column<DateTime>(nullable: true),
                     sellerId = table.Column<int>(nullable: true),
-                    productId = table.Column<int>(nullable: true)
+                    productId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,7 +78,7 @@ namespace Grup22.Migrations
                         column: x => x.productId,
                         principalTable: "Ürün",
                         principalColumn: "productId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Ürün Satış Kaydı_Bayi_sellerId",
                         column: x => x.sellerId,

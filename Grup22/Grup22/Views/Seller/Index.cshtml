@@ -23,6 +23,15 @@
                 @Html.DisplayNameFor(model => model.sellerName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.sellerOwnersName)
+            </th>
+            <th>
+                İl
+            </th>
+            <th>
+                İlçe
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.sellerAdress)
             </th>
             <th></th>
@@ -31,23 +40,32 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.sellerEmail)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.sellerName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.sellerAdress)
-                </td>
-                <td>
-                    <div class="btn-group btn-group-lg">
-                        <button type="button" class="btn btn-default" onclick="window.location.href= '/Seller/Edit/@item.sellerId'">Düzenle</button>
-                        <button type="button" class="btn btn-danger" onclick="window.location.href= '/Seller/Delete/@item.sellerId'">Sil</button>
-                    </div>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.sellerEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sellerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sellerOwnersName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sellerCityName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sellerTownName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sellerAdress)
+            </td>
+            <td>
+                <div class="btn-group btn-group-lg">
+                    <button type="button" class="btn btn-default" onclick="window.location.href= '/Seller/Edit/@item.sellerId'">Düzenle</button>
+                    <button type="button" class="btn btn-danger" onclick="window.location.href= '/Seller/Delete/@item.sellerId'">Sil</button>
+                </div>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

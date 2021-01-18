@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Grup22.Models
 {
-    [Table ("Bayi")]
+    [Table("Bayi")]
     public class Seller
     {
         [Key]
@@ -19,6 +19,12 @@ namespace Grup22.Models
         public string sellerPassword { get; set; }
         [Required, MaxLength(50, ErrorMessage = "50 karakterden uzun olamaz."), DisplayName("Bayi Adı")]
         public string sellerName { get; set; }
+        [Required, MaxLength(50, ErrorMessage = "50 karakterden uzun olamaz."), DisplayName("Bayi Sorumlusunun Adı")]
+        public string sellerOwnersName { get; set; }
+        [Required, MaxLength(100)]
+        public string sellerCityName { get; set; }
+        [Required, MaxLength(50)]
+        public string sellerTownName { get; set; }
         [Required, DisplayName("Adres")]
         public string sellerAdress { get; set; }
         [Required]

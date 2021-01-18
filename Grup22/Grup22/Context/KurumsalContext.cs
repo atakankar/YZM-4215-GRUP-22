@@ -15,5 +15,7 @@ namespace Grup22.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<Seller> Sellers { get; set; }
         public DbSet<ProductSalesRecord> ProductSalesRecords { get; set; }
+        public DbSet<City> City { get; set; }
+        public DbSet<Town> Town { get; set; }
     }
 }

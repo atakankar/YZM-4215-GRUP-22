@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Grup22.Migrations
 {
     [DbContext(typeof(KurumsalContext))]
-    [Migration("20201201102452_Seller")]
-    partial class Seller
+    [Migration("20210116194540_City")]
+    partial class City
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,23 @@ namespace Grup22.Migrations
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Grup22.Models.City", b =>
+                {
+                    b.Property<int>("CityID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.HasKey("CityID");
+
+                    b.ToTable("City");
+                });
 
             modelBuilder.Entity("Grup22.Models.FactoryUser", b =>
                 {
@@ -101,7 +118,7 @@ namespace Grup22.Migrations
                     b.Property<DateTime>("orderCreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("productId")
+                    b.Property<int>("productId")
                         .HasColumnType("int");
 
                     b.Property<int>("salesRecordAmount")
@@ -157,6 +174,28 @@ namespace Grup22.Migrations
                     b.ToTable("Bayi");
                 });
 
+            modelBuilder.Entity("Grup22.Models.Town", b =>
+                {
+                    b.Property<int>("TownID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CityID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TownName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("TownID");
+
+                    b.HasIndex("CityID");
+
+                    b.ToTable("Town");
+                });
+
             modelBuilder.Entity("Grup22.Models.Product", b =>
                 {
                     b.HasOne("Grup22.Models.FactoryUser", "productFactoryUser")
@@ -170,7 +209,9 @@ namespace Grup22.Migrations
                 {
                     b.HasOne("Grup22.Models.Product", "salesRecordProduct")
                         .WithMany()
-                        .HasForeignKey("productId");
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Grup22.Models.Seller", null)
                         .WithMany("sellerSalesRecord")
@@ -182,6 +223,15 @@ namespace Grup22.Migrations
                     b.HasOne("Grup22.Models.FactoryUser", "sellerFactoryUser")
                         .WithMany("factorySellers")
                         .HasForeignKey("factoryUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Grup22.Models.Town", b =>
+                {
+                    b.HasOne("Grup22.Models.City", "TownsCity")
+                        .WithMany()
+                        .HasForeignKey("CityID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

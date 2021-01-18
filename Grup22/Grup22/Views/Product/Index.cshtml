@@ -6,14 +6,17 @@
     ViewData["Title"] = "Ürünler";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+    
+</head>
 <br />
 <p style="text-align:center; font:bold 30px arial, verdana;">ÜRÜNLER</p>
 @if (HttpContextAccessor.HttpContext.Session.GetInt32("isFactory") == 1)
 {
-<button type="button" class="btn btn-primary btn-lg" onclick="window.location.href= '/Product/Create'" style="">Yeni Ürün Ekle</button>
+    <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href= '/Product/Create'" style="">Yeni Ürün Ekle</button>
 }
 
-<table class="table">
+<table id="dataTable" class="table table-striped table-bordered" width="100%">
     <thead>
         <tr>
             <th>
@@ -42,12 +45,21 @@
                 {
                     <td></td>
                 }
-                <td>
+                <td style="font-size:20px;">
                     @Html.DisplayFor(modelItem => item.productName)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.productStock)
-                </td>
+                @if (item.productStock < 100)
+                {
+                    <td style="background-color:orangered; color:azure; font-size:25px; text-align:center; vertical-align: middle;">@Html.DisplayFor(modelItem => item.productStock)</td>
+                }
+                else if (item.productStock < 500)
+                {
+                    <td style="background-color:gold; font-size:25px; text-align:center; vertical-align: middle;">@Html.DisplayFor(modelItem => item.productStock)</td>
+                }
+                else
+                {
+                    <td style="font-size: 25px; text-align: center; vertical-align: middle;">@Html.DisplayFor(modelItem => item.productStock)</td>
+                }
                 <td>
                     <div class="btn-group btn-group-lg">
                         <button type="button" class="btn btn-default" onclick="window.location.href= '/Product/Edit/@item.productId'">Güncelle</button>
@@ -59,3 +71,30 @@
         }
     </tbody>
 </table>
+
+@*@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#dataTable").dataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+            },
+            "searching": true,
+            "ordering": true,
+            "paging": true,
+            "pagingType": "full_numbers",
+            "pageLength": 10,
+            "responsive": true,
+            "columnDefs": [{
+                "targets": 3,
+                "orderable": false
+            }]
+        });
+    });
+</script>
