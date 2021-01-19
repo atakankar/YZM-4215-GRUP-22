@@ -25,7 +25,6 @@ namespace Grup22.Controllers
         {
             if (HttpContext.Session.GetInt32("isFactory") == 1)
             {
-                //var kurumsalContext = _context.Sellers.Include(s => s.sellerFactoryUser).Where(x => x.factoryUserId == HttpContext.Session.GetInt32("userId"));
                 var kurumsalContext = _context.Sellers.FromSqlRaw($"getSeller {HttpContext.Session.GetInt32("userId")}");
                 return View(await kurumsalContext.ToListAsync());
             }
@@ -58,18 +57,19 @@ namespace Grup22.Controllers
             _context.Add(seller);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-            //return View(seller);
         }
 
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
+                // view'a yönlendirme yapılacak
                 return NotFound();
             }
             var seller = await _context.Sellers.FindAsync(id);
             if (seller == null)
             {
+                // view'a yönlendirme yapılacak
                 return NotFound();
             }
             ViewBag.Cities = _context.City;
@@ -83,6 +83,7 @@ namespace Grup22.Controllers
         {
             if (id != seller.sellerId)
             {
+                // view'a yönlendirme yapılacak
                 return NotFound();
             }
             try
@@ -103,6 +104,7 @@ namespace Grup22.Controllers
             {
                 if (!SellerExists(seller.sellerId))
                 {
+                    // view'a yönlendirme yapılacak
                     return NotFound();
                 }
                 else
@@ -111,13 +113,13 @@ namespace Grup22.Controllers
                 }
             }
             return RedirectToAction(nameof(Index));
-            //return View(seller);
         }
 
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
+                // view'a yönlendirme yapılacak
                 return NotFound();
             }
 
@@ -126,6 +128,7 @@ namespace Grup22.Controllers
                 .FirstOrDefaultAsync(m => m.sellerId == id);
             if (seller == null)
             {
+                // view'a yönlendirme yapılacak
                 return NotFound();
             }
 
@@ -146,6 +149,7 @@ namespace Grup22.Controllers
         {
             if (id == null)
             {
+                // view'a yönlendirme yapılacak
                 return NotFound();
             }
 
@@ -162,13 +166,12 @@ namespace Grup22.Controllers
 
         private bool SellerExists(int id)
         {
+        // varolan satıcılar var mı true false
             return _context.Sellers.Any(e => e.sellerId == id);
         }
 
         public JsonResult getTowns(int cityId)
         {
-            //_context.Town.Where(t => t.CityID == cityId).Join(_context.City.Include(c => c.CityID), city => city.CityID, town => town.CityID).ToList();
-            //var students = context.Students.FromSql("GetStudents 'Bill'");
             var towns = (
                          from x in _context.Town
                          join y in _context.City on x.CityID equals y.CityID
