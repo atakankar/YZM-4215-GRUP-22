@@ -16,12 +16,14 @@ namespace Grup22.Controllers
 {
     public class SellerUserController : Controller
     {
+        // veritabanı yönetimini sağlayan entity framework katmanı
         private readonly KurumsalContext _context;
         public SellerUserController(KurumsalContext context)
         {
             _context = context;
         }
 
+        // fabrika kullanıcısının login işlemi
         [HttpGet]
         public IActionResult Login()
         {
@@ -87,6 +89,7 @@ namespace Grup22.Controllers
                 email.Subject = "Şifre Yenileme";
                 email.Body = new TextPart(TextFormat.Plain) { Text = "Sayın '" + user.sellerName + "', Yeni Şifreniz: " + number };
 
+                // mail routing işlemleri
                 using var smtp = new SmtpClient();
                 smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
                 smtp.Authenticate("abbadabaka@gmail.com", "asdfgh1346");
