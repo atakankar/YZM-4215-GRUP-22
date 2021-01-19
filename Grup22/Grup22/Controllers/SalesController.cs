@@ -32,11 +32,11 @@ namespace Grup22.Controllers
             else if (HttpContext.Session.GetInt32("isFactory") == 1)
             {
                 var orderInformations = _context.ProductSalesRecords.Where(w => w.salesRecordConfirmation == false && w.salesRecordProduct.factoryUserId == HttpContext.Session.GetInt32("userId")).Join(_context.Products, record => record.productId, product => product.productId,
-                    (record, product) => Tuple.Create(record, product)).ToList(); 
+                    (record, product) => Tuple.Create(record, product)).ToList();
                 return View(orderInformations);
             }
             else
-            { 
+            {
                 var EmptyRecords = _context.ProductSalesRecords.Where(x => x.salesRecordId == 0);
                 return View(EmptyRecords.ToList());
             }
@@ -51,9 +51,11 @@ namespace Grup22.Controllers
         [HttpPost]
         public IActionResult CreateOrder(int saleProductId, int amountRequested)
         {
-            Product _product = _context.Products.Find(saleProductId); 
+            Product _product = _context.Products.Find(saleProductId);
             if (amountRequested == 0)
                 ViewBag.error = "0 ürün sipariş edilemez.";
+            else if (amountRequested < 50)
+                ViewBag.error = "50'den az ürün sipariş edilemez.";
             else if (amountRequested <= _product.productStock)
             {
                 ProductSalesRecord newSalesRecord = new ProductSalesRecord();
@@ -88,6 +90,8 @@ namespace Grup22.Controllers
             Product _product = _context.Products.Find(salesRecord.productId);
             if (salesRecord.salesRecordAmount == 0)
                 ViewBag.error = "0 ürün sipariş edilemez.";
+            else if (salesRecord.salesRecordAmount < 50)
+                ViewBag.error = "50'den az ürün sipariş edilemez.";
             else if (salesRecord.salesRecordAmount <= _product.productStock)
             {
                 //_context.ProductSalesRecords.Update(editRecord);
@@ -99,7 +103,7 @@ namespace Grup22.Controllers
             else
                 ViewBag.error = "Stokta istenen miktarda ürün bulunmamaktadır.";
             return View(salesRecord);
-            }
+        }
 
         public IActionResult DeleteOrder(int id)
         {
@@ -139,13 +143,13 @@ namespace Grup22.Controllers
         }
         public IActionResult IndexSalesRecords()
         {
-            if(HttpContext.Session.GetInt32("isFactory") == 0)
-            { 
+            if (HttpContext.Session.GetInt32("isFactory") == 0)
+            {
                 var index = _context.ProductSalesRecords.Where(w => w.salesRecordConfirmation == true && w.sellerId == HttpContext.Session.GetInt32("userId")).Join(_context.Products.Include(i => i.productFactoryUser), record => record.productId, product => product.productId,
                     (record, product) => Tuple.Create(record, product)).ToList();
                 return View(index);
             }
-            else if(HttpContext.Session.GetInt32("isFactory") == 1)
+            else if (HttpContext.Session.GetInt32("isFactory") == 1)
             {
                 var index = _context.ProductSalesRecords.Where(w => w.salesRecordConfirmation == true && w.salesRecordProduct.factoryUserId == HttpContext.Session.GetInt32("userId")).Join(_context.Products.Include(i => i.productFactoryUser), record => record.productId, product => product.productId,
                     (record, product) => Tuple.Create(record, product)).ToList();
