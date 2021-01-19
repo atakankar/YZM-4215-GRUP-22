@@ -149,7 +149,8 @@ namespace Grup22.Controllers
             }
             return View(product);
         }
-
+        
+        // ürün düzenleme
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("productId,productName,productDescription,productStock,productPrice")] Product product,IFormFile uploadImage)
@@ -196,6 +197,7 @@ namespace Grup22.Controllers
             return View(product);
         }
 
+        // ürün silme işlemi
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -214,6 +216,7 @@ namespace Grup22.Controllers
             return View(product);
         }
 
+        // ürün silme onaylama endpointi
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
