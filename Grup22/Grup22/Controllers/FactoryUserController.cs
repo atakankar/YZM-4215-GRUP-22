@@ -16,12 +16,16 @@ using MimeKit.Text;
 using MailKit.Security;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Http;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Grup22.Controllers
 {
     public class FactoryUserController : Controller
     {
         private readonly KurumsalContext _context;
+        public int loginNumber = 0; 
 
         public FactoryUserController(KurumsalContext context)
         {
@@ -83,30 +87,59 @@ namespace Grup22.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(FactoryUser user)
+        public async Task<IActionResult> Login(FactoryUser user)
         {
+            //Giriş sayısını sessionda tutuyoruz ve action içinde bunu kontrol ederek üst üste 3 defa yanlış giriş yaparsa reCaptcha kontrolünü devreye sokuyoruz.
+            if (HttpContext.Session.GetInt32("loginNumber") == null)
+                HttpContext.Session.SetInt32("loginNumber", loginNumber);
+            else
+                loginNumber = (int)HttpContext.Session.GetInt32("loginNumber");
+            if (loginNumber >= 3)
+            {
+                var captchaImage = HttpContext.Request.Form["g-recaptcha-response"];
+                if (string.IsNullOrEmpty(captchaImage))
+                {
+                    ViewBag.error = "Captcha doğrulanmamış";
+                    ViewBag.loginNumber = loginNumber;
+                    return View();
+                }
+
+                var verified = await CheckCaptcha();
+                if (!verified)
+                {
+                    ViewBag.error = "Captcha yanlış doğrulanmış";
+                    ViewBag.loginNumber = loginNumber;
+                    return View();
+                }
+            }
+
             FactoryUser loginUser = _context.factoryUsers.FirstOrDefault(x => x.factoryUserEmail == user.factoryUserEmail);
             if (loginUser == null)
             {
                 ViewBag.error = "Böyle bir kullanıcı kayıtlı değil";
+                loginNumber++;
+                ViewBag.loginNumber = loginNumber;
+                HttpContext.Session.SetInt32("loginNumber", loginNumber);
                 return View();
             }
             // Kullanıcının girdiği şifrenin tekrar MD5 şifreleme algoritması kullanılarak hash'i çıkarılıyor ve çıkan sonuçlar karşılaştırılıyor.
             //Böylelikle kullanıcının şifresinin güvenliği sağlanıyor.
             if (loginUser.factoryUserPassword == Crypto.Hash(user.factoryUserPassword, "MD5"))
             {
+                HttpContext.Session.Clear();
                 HttpContext.Session.SetInt32("isFactory", 1);
                 HttpContext.Session.SetInt32("userId", loginUser.factoryUserId);
                 HttpContext.Session.SetString("userEmail", loginUser.factoryUserEmail);
                 HttpContext.Session.SetString("userName", loginUser.factoryUserName);
-
                 //HttpContext.Session.SetString("isUserLogin", "true"); // Yeni bir session oluşturma.
                 //HttpContext.Session.GetString("isUserLogin"); // Sessiondan değer getirme.
                 //HttpContext.Session.Clear(); // Tüm sessionları temizleme.
-
                 return RedirectToAction("Index", "Product");
             }
             ViewBag.error = "Yanlış Şifre";
+            loginNumber++;
+            ViewBag.loginNumber = loginNumber;
+            HttpContext.Session.SetInt32("loginNumber", loginNumber);
             return View();
         }
 
@@ -152,6 +185,22 @@ namespace Grup22.Controllers
                 ViewBag.error = "Yeni şifreniz Email adresinize gönderildi!";
             }
             return View();
+        }
+        private async Task<bool> CheckCaptcha()
+        {
+            var postData = new List<KeyValuePair<string, string>>()
+            {
+                new KeyValuePair<string, string>("secret", "6Lfn2i4aAAAAAKAYc_UBCouscCWuDHIa_BkvsUNR"),
+                new KeyValuePair<string, string>("remoteip", HttpContext.Connection.RemoteIpAddress.ToString()),
+                new KeyValuePair<string, string>("response", HttpContext.Request.Form["g-recaptcha-response"])
+            };
+
+            var client = new HttpClient();
+            var response = await client.PostAsync("https://www.google.com/recaptcha/api/siteverify", new FormUrlEncodedContent(postData));
+
+            var o = (JObject)JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());
+
+            return (bool)o["success"];
         }
     }
 }

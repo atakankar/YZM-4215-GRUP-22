@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Helpers;
 using Grup22.Context;
@@ -11,19 +12,20 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
 using MimeKit.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Grup22.Controllers
 {
     public class SellerUserController : Controller
     {
-        // veritabanı yönetimini sağlayan entity framework katmanı
         private readonly KurumsalContext _context;
+        public int loginNumber = 0;
         public SellerUserController(KurumsalContext context)
         {
             _context = context;
         }
 
-        // fabrika kullanıcısının login işlemi
         [HttpGet]
         public IActionResult Login()
         {
@@ -35,16 +37,43 @@ namespace Grup22.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(FactoryUser user)
+        public async Task<IActionResult> Login(FactoryUser user)
         {
+            if (HttpContext.Session.GetInt32("loginNumber") == null)
+                HttpContext.Session.SetInt32("loginNumber", loginNumber);
+            else
+                loginNumber = (int)HttpContext.Session.GetInt32("loginNumber");
+            if (loginNumber >= 3)
+            {
+                var captchaImage = HttpContext.Request.Form["g-recaptcha-response"];
+                if (string.IsNullOrEmpty(captchaImage))
+                {
+                    ViewBag.error = "Captcha doğrulanmamış";
+                    ViewBag.loginNumber = loginNumber;
+                    return View("~/Views/FactoryUser/Login.cshtml");
+                }
+
+                var verified = await CheckCaptcha();
+                if (!verified)
+                {
+                    ViewBag.error = "Captcha yanlış doğrulanmış";
+                    ViewBag.loginNumber = loginNumber;
+                    return View("~/Views/FactoryUser/Login.cshtml");
+                }
+            }
+
             Seller loginUser = _context.Sellers.FirstOrDefault(x => x.sellerEmail == user.factoryUserEmail);
             if (loginUser == null)
             {
                 ViewBag.error = "Böyle bir kullanıcı kayıtlı değil";
+                loginNumber++;
+                ViewBag.loginNumber = loginNumber;
+                HttpContext.Session.SetInt32("loginNumber", loginNumber);
                 return View("~/Views/FactoryUser/Login.cshtml");
             }
             if (loginUser.sellerPassword == Crypto.Hash(user.factoryUserPassword, "MD5"))
             {
+                HttpContext.Session.Clear();
                 HttpContext.Session.SetInt32("isFactory", 0);
                 HttpContext.Session.SetInt32("userId", loginUser.sellerId);
                 HttpContext.Session.SetString("userEmail", loginUser.sellerEmail);
@@ -52,6 +81,9 @@ namespace Grup22.Controllers
                 return RedirectToAction("IndexForSeller", "Product");
             }
             ViewBag.error = "Yanlış Şifre";
+            loginNumber++;
+            ViewBag.loginNumber = loginNumber;
+            HttpContext.Session.SetInt32("loginNumber", loginNumber);
             return View("~/Views/FactoryUser/Login.cshtml");
         }
 
@@ -89,7 +121,6 @@ namespace Grup22.Controllers
                 email.Subject = "Şifre Yenileme";
                 email.Body = new TextPart(TextFormat.Plain) { Text = "Sayın '" + user.sellerName + "', Yeni Şifreniz: " + number };
 
-                // mail routing işlemleri
                 using var smtp = new SmtpClient();
                 smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
                 smtp.Authenticate("abbadabaka@gmail.com", "asdfgh1346");
@@ -98,6 +129,22 @@ namespace Grup22.Controllers
                 ViewBag.error = "Yeni şifreniz Email adresinize gönderildi!";
             }
             return View("~/Views/FactoryUser/ForgotPassword.cshtml");
+        }
+        private async Task<bool> CheckCaptcha()
+        {
+            var postData = new List<KeyValuePair<string, string>>()
+            {
+                new KeyValuePair<string, string>("secret", "6Lfn2i4aAAAAAKAYc_UBCouscCWuDHIa_BkvsUNR"),
+                new KeyValuePair<string, string>("remoteip", HttpContext.Connection.RemoteIpAddress.ToString()),
+                new KeyValuePair<string, string>("response", HttpContext.Request.Form["g-recaptcha-response"])
+            };
+
+            var client = new HttpClient();
+            var response = await client.PostAsync("https://www.google.com/recaptcha/api/siteverify", new FormUrlEncodedContent(postData));
+
+            var o = (JObject)JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());
+
+            return (bool)o["success"];
         }
     }
 }
